@@ -1,0 +1,21 @@
+{
+  "name": "cg-course-algorithm",
+  "version": "0.0.1",
+  "repository": "git@github.com:CLDXiang/CG-course-algorithm.git",
+  "author": "CLDXiang <417198670@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "ts-loader": "^8.0.11",
+    "typescript": "^4.0.5",
+    "webpack": "^5.5.1",
+    "webpack-cli": "^4.2.0"
+  }
+}
