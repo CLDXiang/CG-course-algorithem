@@ -1,8 +1,16 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: { app: './src/index.ts' },
   devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './dist',
+    hot: true,
+    open: true,
+  },
   module: {
     rules: [
       {
@@ -12,11 +20,18 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'CG-course-algorithm'
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
   resolve: {
-    extensions: [ '.ts', '.js' ],
+    extensions: ['.ts', '.js'],
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
   },
 };
