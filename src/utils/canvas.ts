@@ -115,3 +115,32 @@ export const drawPoint = (
 
   ctx.restore();
 };
+
+/** 画坐标系 */
+export const drawCoordinateSystem = (pageState: {
+  xRange: number;
+  yRange: number;
+  xScaleRatio: number;
+  yScaleRatio: number;
+}) => {
+  const canvas = document.querySelector<HTMLCanvasElement>('canvas');
+  if (!canvas) {
+    return;
+  }
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    return;
+  }
+  ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  /** x 轴 */
+  drawLine(ctx, [0, 0], [CANVAS_WIDTH - CANVAS_MARGIN * 2, 0]);
+  /** y 轴 */
+  drawLine(ctx, [0, 0], [0, CANVAS_HEIGHT - CANVAS_MARGIN * 2]);
+
+  for (let x = 1; x <= pageState.xRange; x += 1) {
+    drawXMarkLine(ctx, pageState.xScaleRatio * x, x.toString(), { lineDash: [5, 5], color: '#bbb' });
+  }
+  for (let y = 1; y <= pageState.yRange; y += 1) {
+    drawYMarkLine(ctx, pageState.yScaleRatio * y, y.toString(), { lineDash: [5, 5], color: '#bbb' });
+  }
+};
