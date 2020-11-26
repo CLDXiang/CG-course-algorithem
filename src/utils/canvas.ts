@@ -125,11 +125,11 @@ export const drawCoordinateSystem = (pageState: {
 }) => {
   const canvas = document.querySelector<HTMLCanvasElement>('canvas');
   if (!canvas) {
-    return;
+    return null;
   }
   const ctx = canvas.getContext('2d');
   if (!ctx) {
-    return;
+    return null;
   }
   ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   /** x 轴 */
@@ -143,4 +143,6 @@ export const drawCoordinateSystem = (pageState: {
   for (let y = 1; y <= pageState.yRange; y += 1) {
     drawYMarkLine(ctx, pageState.yScaleRatio * y, y.toString(), { lineDash: [5, 5], color: '#bbb' });
   }
+
+  return ctx;
 };
