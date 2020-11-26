@@ -29,7 +29,7 @@ export const render = <K extends keyof HTMLElementTagNameMap>(
     className?: string | string[];
     style?: Properties<string | number>;
   },
-  children?: HTMLElement[],
+  children?: (HTMLElement | string)[],
 ): HTMLElementTagNameMap[K] => {
   const ele = document.createElement(tagName);
   const { className, style } = styleSheet;
@@ -43,4 +43,39 @@ export const render = <K extends keyof HTMLElementTagNameMap>(
     ele.append(...children);
   }
   return ele;
+};
+
+/** create an number input element with oninput event callback */
+export const createNumberInputWithCallback = (
+  callback: ((value: string) => void) | (() => void),
+  config?: {
+    init?: number;
+    step?: number;
+    min?: number;
+    max?: number;
+  },
+) => {
+  const input = document.createElement('input');
+  input.type = 'number';
+  if (config) {
+    const {
+      init, step, min, max,
+    } = config;
+    if (init !== undefined) {
+      input.value = init.toString();
+    }
+    if (step !== undefined) {
+      input.step = step.toString();
+    }
+    if (min !== undefined) {
+      input.min = min.toString();
+    }
+    if (max !== undefined) {
+      input.max = max.toString();
+    }
+  }
+  input.addEventListener('input', () => {
+    callback(input.value);
+  });
+  return input;
 };

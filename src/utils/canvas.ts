@@ -91,10 +91,27 @@ export const drawYMarkLine = (
   ctx.save();
 
   // x 轴标记
-  ctx.fillText(text, mapX(-10), mapY(y));
+  ctx.fillText(text, mapX(-15), mapY(y));
 
   // 画线
   drawLine(ctx, [0, y], [CANVAS_WIDTH - CANVAS_MARGIN * 2, y], lineStyle);
+
+  ctx.restore();
+};
+
+/** 画点 */
+export const drawPoint = (
+  ctx: CanvasRenderingContext2D,
+  point: [number, number],
+  color: string = '#ef755a',
+) => {
+  ctx.save();
+
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(mapX(point[0]), mapY(point[1]), 5, 0, Math.PI * 2);
+  ctx.stroke();
 
   ctx.restore();
 };
