@@ -103,7 +103,7 @@ export const drawYMarkLine = (
 export const drawPoint = (
   ctx: CanvasRenderingContext2D,
   point: [number, number],
-  color: string = '#ef755a',
+  color = '#ef755a',
 ) => {
   ctx.save();
 
@@ -117,13 +117,16 @@ export const drawPoint = (
 };
 
 /** 画坐标系 */
-export const drawCoordinateSystem = (pageState: {
-  xRange: number;
-  yRange: number;
-  xScaleRatio: number;
-  yScaleRatio: number;
-}) => {
-  const canvas = document.querySelector<HTMLCanvasElement>('canvas');
+export const drawCoordinateSystem = (
+  canvas: HTMLCanvasElement | null,
+  pageState: {
+    xMax: number;
+    yMax: number;
+    xScaleRatio: number;
+    yScaleRatio: number;
+  },
+) => {
+  // const canvas = document.querySelector<HTMLCanvasElement>('canvas');
   if (!canvas) {
     return null;
   }
@@ -137,10 +140,10 @@ export const drawCoordinateSystem = (pageState: {
   /** y 轴 */
   drawLine(ctx, [0, 0], [0, CANVAS_HEIGHT - CANVAS_MARGIN * 2]);
 
-  for (let x = 1; x <= pageState.xRange; x += 1) {
+  for (let x = 1; x <= pageState.xMax; x += 1) {
     drawXMarkLine(ctx, pageState.xScaleRatio * x, x.toString(), { lineDash: [5, 5], color: '#bbb' });
   }
-  for (let y = 1; y <= pageState.yRange; y += 1) {
+  for (let y = 1; y <= pageState.yMax; y += 1) {
     drawYMarkLine(ctx, pageState.yScaleRatio * y, y.toString(), { lineDash: [5, 5], color: '#bbb' });
   }
 

@@ -1,16 +1,19 @@
 module.exports = {
+  root: true,
   env: {
     node: true,
   },
-  parser: '@typescript-eslint/parser',
-  parserOptions:  {
-    ecmaVersion: 'esnext',
-    project: './tsconfig.json',
+  extends: [
+    'plugin:vue/vue3-recommended',
+    '@vue/airbnb',
+    '@vue/typescript/recommended',
+  ],
+  parserOptions: {
+    ecmaVersion: 2020,
   },
-  plugins: ['@typescript-eslint'],
-  extends: ['airbnb-typescript/base'],
   rules: {
     'no-console': 0,
     'import/prefer-default-export': 0,
+    'no-param-reassign': 0,
   }
-}
+};
